@@ -1,0 +1,39 @@
+name: flutter_application_10
+description: CareVerse - Your Health, Our Priority
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  supabase_flutter: ^2.3.4
+  cupertino_icons: ^1.0.2
+  image_picker: ^1.0.7
+  intl: ^0.19.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/Dr-Md-Mushfiqul-Hasan.jpg
+    - assets/images/Dr.-Kaji-Md.-Nasimuzzaman.jpg
+    - assets/images/Dr.-Khair-Ahmed-Choudhury.jpg
+    - assets/images/Dr.-Khursheda-Tahmin-Shimu-.jpg
+    - assets/images/Dr.-Md.-Sirajur-Rahman-Sarwar-1.jpg
+    - assets/images/Dr.-Shishir-Chakraborty.jpg
+    - assets/images/Prof.-Dr.-Biplob-Kumar-Roy.jpg
+    - assets/images/Prof.-Dr.-Ishtiaque-Ul-Fattah.jpg
+    - assets/images/Prof.-Dr.-Md.-Manajjir-Ali.jpg
+    - assets/images/Prof.-Dr.-Md.-Rezaul-Karim.jpg
+    - assets/images/Prof.-Dr.-N.-K.-Sinha.jpg
+    - assets/images/Prof.-Dr.-Shamima-Akhter.jpg
+    - assets/images/logo.png
