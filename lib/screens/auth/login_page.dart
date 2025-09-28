@@ -38,7 +38,6 @@ class _LoginPageState extends State<LoginPage> {
         );
 
         if (response.user != null) {
-          // Check if email is confirmed
           if (response.user!.emailConfirmedAt == null) {
             _showEmailNotConfirmedDialog();
           } else {

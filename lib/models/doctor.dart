@@ -66,7 +66,6 @@ class Doctor {
       return value.map((item) => item.toString()).toList();
     }
     if (value is String) {
-      // Handle case where it might be a JSON string
       try {
         return [value];
       } catch (e) {

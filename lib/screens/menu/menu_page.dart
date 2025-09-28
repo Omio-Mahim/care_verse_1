@@ -13,7 +13,6 @@ class MenuPage extends StatelessWidget {
   const MenuPage({super.key});
 
   Future<void> _logout(BuildContext context) async {
-    // Show confirmation dialog first
     final bool? shouldLogout = await showDialog<bool>(
       context: context,
       builder: (BuildContext context) {
@@ -49,7 +48,6 @@ class MenuPage extends StatelessWidget {
     if (shouldLogout != true) return;
 
     try {
-      // Show loading dialog
       showDialog(
         context: context,
         barrierDismissible: false,
@@ -67,22 +65,18 @@ class MenuPage extends StatelessWidget {
         },
       );
 
-      // Perform logout
       await SupabaseService.signOut();
 
-      // Close loading dialog
       if (context.mounted) {
         Navigator.of(context).pop();
       }
 
-      // Navigate to login page and clear all previous routes
       if (context.mounted) {
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (_) => const LoginPage()),
           (route) => false,
         );
 
-        // Show success message
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Row(
@@ -98,12 +92,10 @@ class MenuPage extends StatelessWidget {
         );
       }
     } catch (error) {
-      // Close loading dialog if it's open
       if (context.mounted) {
         Navigator.of(context).pop();
       }
 
-      // Show error message
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(

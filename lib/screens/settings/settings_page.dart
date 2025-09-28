@@ -138,7 +138,6 @@ class SettingsPage extends StatelessWidget {
                             });
 
                             try {
-                              // In a real app, you would implement password change with Supabase
                               await Future.delayed(const Duration(seconds: 1));
                               Navigator.of(context).pop();
                               ScaffoldMessenger.of(context).showSnackBar(

@@ -52,10 +52,8 @@ class _TelemedicineHomePageState extends State<TelemedicineHomePage> {
         errorMessage = null;
       });
 
-      // Load doctors from local data first (fallback)
       allDoctors = getDoctorsData();
 
-      // Try to load from Supabase
       try {
         final supabaseDoctors = await SupabaseService.getDoctors();
         if (supabaseDoctors.isNotEmpty) {
@@ -65,7 +63,6 @@ class _TelemedicineHomePageState extends State<TelemedicineHomePage> {
         print('Failed to load doctors from Supabase, using local data: $e');
       }
 
-      // Load user-specific data
       final user = SupabaseService.currentUser;
       if (user != null) {
         try {
@@ -80,7 +77,7 @@ class _TelemedicineHomePageState extends State<TelemedicineHomePage> {
           });
         } catch (e) {
           print('Failed to load user data: $e');
-          // Continue with empty lists
+
           setState(() {
             notifications = [];
             bookmarkedDoctorIds = [];

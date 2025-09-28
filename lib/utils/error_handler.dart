@@ -83,7 +83,6 @@ class ErrorHandler {
       return 'Request timed out. Please check your connection and try again.';
     }
 
-    // Remove common prefixes to make error more readable
     return error
         .toString()
         .replaceAll('Exception: ', '')

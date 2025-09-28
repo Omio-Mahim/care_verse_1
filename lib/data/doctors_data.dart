@@ -59,6 +59,5 @@ List<Doctor> getDoctorsData() {
       bio:
           "Prof. Dr. Md. Manajjir Ali is a Child Specialist in Sylhet with extensive experience in pediatric care.",
     ),
-    // Add more doctors as needed...
   ];
 }

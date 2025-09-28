@@ -54,12 +54,9 @@ class _RegisterPageState extends State<RegisterPage> {
         );
 
         if (response.user != null) {
-          // Check if email confirmation is required
           if (response.session == null) {
-            // Email confirmation required
             _showEmailConfirmationDialog();
           } else {
-            // Registration successful and user is logged in
             ErrorHandler.showSuccess(
               context,
               "Registration successful! Welcome to CareVerse!",
@@ -73,7 +70,6 @@ class _RegisterPageState extends State<RegisterPage> {
       } catch (error) {
         String errorMessage = ErrorHandler.getReadableError(error);
 
-        // Handle specific rate limit error
         if (error.toString().contains('over_email_send_rate_limit')) {
           errorMessage =
               "Please wait 45 seconds before trying to register again. This is for security purposes.";

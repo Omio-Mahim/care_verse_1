@@ -242,8 +242,8 @@ class SlotsPage extends StatelessWidget {
 
       await SupabaseService.createAppointment(appointment);
 
-      Navigator.of(context).pop(); // Close dialog
-      Navigator.of(context).pop(); // Go back to previous screen
+      Navigator.of(context).pop();
+      Navigator.of(context).pop();
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

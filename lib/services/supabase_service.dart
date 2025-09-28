@@ -4,7 +4,6 @@ import '../models/models.dart';
 class SupabaseService {
   static final SupabaseClient _client = Supabase.instance.client;
 
-  // Auth methods
   static Future<AuthResponse> signUp(
       String email, String password, String name) async {
     try {
@@ -15,7 +14,6 @@ class SupabaseService {
       );
 
       if (response.user != null) {
-        // Create user profile
         await _client.from('user_profiles').insert({
           'id': response.user!.id,
           'name': name,
@@ -48,11 +46,10 @@ class SupabaseService {
     }
   }
 
-// Update your existing signOut method in SupabaseService
   static Future<void> signOut() async {
     try {
       await _client.auth.signOut();
-      // Clear any local storage or cached data if needed
+
       print('User signed out successfully');
     } catch (e) {
       print('Error during sign out: $e');
@@ -60,12 +57,10 @@ class SupabaseService {
     }
   }
 
-// Add this method to check auth state
   static bool get isLoggedIn {
     return _client.auth.currentUser != null;
   }
 
-// Add this method to listen to auth changes
   static Stream<AuthState> get authStateChanges {
     return _client.auth.onAuthStateChange;
   }
@@ -87,14 +82,12 @@ class SupabaseService {
       if (response == null) {
         print('No profile found, creating new one...');
 
-        // Get current user info
         final user = _client.auth.currentUser;
         if (user == null) {
           print('No current user found');
           return null;
         }
 
-        // Create default profile data
         final defaultProfile = {
           'id': userId,
           'name': user.email?.split('@')[0] ?? 'User',
@@ -112,7 +105,6 @@ class SupabaseService {
         print('Creating profile with data: $defaultProfile');
 
         try {
-          // Insert the profile
           final insertResponse = await _client
               .from('user_profiles')
               .insert(defaultProfile)
@@ -124,7 +116,6 @@ class SupabaseService {
         } catch (insertError) {
           print('Failed to create profile: $insertError');
 
-          // Return a temporary profile that's not saved to database
           return UserProfile(
             id: userId,
             name: user.email?.split('@')[0] ?? 'User',
@@ -145,7 +136,6 @@ class SupabaseService {
     } catch (e) {
       print('Error in getUserProfile: $e');
 
-      // Return a basic profile as fallback
       final user = _client.auth.currentUser;
       if (user != null) {
         return UserProfile(
@@ -178,7 +168,6 @@ class SupabaseService {
     }
   }
 
-  // Doctors methods
   static Future<List<Doctor>> getDoctors() async {
     try {
       final response = await _client.from('doctors').select();
@@ -203,7 +192,6 @@ class SupabaseService {
     }
   }
 
-  // Appointments methods
   static Future<List<BookedAppointment>> getUserAppointments(
       String userId) async {
     try {
@@ -216,7 +204,6 @@ class SupabaseService {
       List<BookedAppointment> appointments = [];
       for (var item in response) {
         try {
-          // Handle the doctor data properly
           final doctorData = item['doctors'];
           if (doctorData != null) {
             final appointment = BookedAppointment(
@@ -256,7 +243,6 @@ class SupabaseService {
         'booking_date': appointment.bookingDate.toIso8601String(),
       });
 
-      // Create notification
       await createNotification(NotificationItem(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
         type: NotificationType.appointment,
@@ -267,7 +253,6 @@ class SupabaseService {
         userId: appointment.userId,
       ));
 
-      // Update user consultation count
       final user = await getUserProfile(appointment.userId);
       if (user != null) {
         await updateUserProfile(user.copyWith(
@@ -290,7 +275,6 @@ class SupabaseService {
     }
   }
 
-  // Health Records methods
   static Future<List<HealthRecord>> getUserHealthRecords(String userId) async {
     try {
       final response = await _client
@@ -335,7 +319,6 @@ class SupabaseService {
     }
   }
 
-  // Notifications methods
   static Future<List<NotificationItem>> getUserNotifications(
       String userId) async {
     try {
@@ -382,9 +365,6 @@ class SupabaseService {
     }
   }
 
-// Update these methods in your SupabaseService class
-
-// Chat methods
   static Future<List<ChatMessage>> getChatMessages() async {
     try {
       print('Fetching chat messages...');
@@ -476,12 +456,11 @@ class SupabaseService {
           });
     } catch (e) {
       print('Error setting up chat stream: $e');
-      // Return empty stream if setup fails
+
       return Stream.value(<ChatMessage>[]);
     }
   }
 
-  // Bookmarks methods
   static Future<List<String>> getUserBookmarkedDoctors(String userId) async {
     try {
       final response = await _client
@@ -521,7 +500,6 @@ class SupabaseService {
     }
   }
 
-  // Add this method to your SupabaseService class
   static Future<void> resendConfirmationEmail(String email) async {
     try {
       await _client.auth.resend(

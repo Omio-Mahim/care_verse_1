@@ -48,7 +48,7 @@ class _AskFreePageState extends State<AskFreePage> {
     try {
       await SupabaseService.sendChatMessage(message);
       _messageController.clear();
-      _loadMessages(); // Reload messages
+      _loadMessages();
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error: $e')),

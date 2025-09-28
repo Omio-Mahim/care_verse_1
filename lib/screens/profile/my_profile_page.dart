@@ -16,7 +16,6 @@ class _MyProfilePageState extends State<MyProfilePage> {
   bool isSaving = false;
   String? errorMessage;
 
-  // Form controllers
   final _formKey = GlobalKey<FormState>();
   late TextEditingController _nameController;
   late TextEditingController _phoneController;
@@ -132,7 +131,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
     setState(() {
       isEditing = false;
     });
-    _updateControllers(); // Reset to original values
+    _updateControllers();
   }
 
   @override
@@ -257,7 +256,6 @@ class _MyProfilePageState extends State<MyProfilePage> {
             key: _formKey,
             child: Column(
               children: [
-                // Profile Header
                 Container(
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
@@ -330,10 +328,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                     ],
                   ),
                 ),
-
                 const SizedBox(height: 20),
-
-                // Personal Information
                 Card(
                   elevation: 2,
                   shape: RoundedRectangleBorder(
@@ -353,8 +348,6 @@ class _MyProfilePageState extends State<MyProfilePage> {
                           ),
                         ),
                         const SizedBox(height: 16),
-
-                        // Name Field
                         isEditing
                             ? TextFormField(
                                 controller: _nameController,
@@ -373,10 +366,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                               )
                             : _buildInfoRow(
                                 Icons.person, "Name", userProfile!.name),
-
                         const SizedBox(height: 16),
-
-                        // Phone Field
                         isEditing
                             ? TextFormField(
                                 controller: _phoneController,
@@ -396,10 +386,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                                     ? "Not set"
                                     : userProfile!.phone,
                               ),
-
                         const SizedBox(height: 16),
-
-                        // Age Field
                         isEditing
                             ? TextFormField(
                                 controller: _ageController,
@@ -427,10 +414,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                                     ? "Not set"
                                     : "${userProfile!.age} years",
                               ),
-
                         const SizedBox(height: 16),
-
-                        // Gender Field
                         isEditing
                             ? DropdownButtonFormField<String>(
                                 value: _selectedGender,
@@ -459,10 +443,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                                     ? "Not set"
                                     : userProfile!.gender,
                               ),
-
                         const SizedBox(height: 16),
-
-                        // Address Field
                         isEditing
                             ? TextFormField(
                                 controller: _addressController,
@@ -485,10 +466,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 16),
-
-                // Statistics (Always visible, not editable)
                 Card(
                   elevation: 2,
                   shape: RoundedRectangleBorder(
@@ -533,10 +511,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 16),
-
-                // Member Since (Always visible, not editable)
                 Card(
                   elevation: 2,
                   shape: RoundedRectangleBorder(
@@ -575,10 +550,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 20),
-
-                // Edit/Save Button (Only show when not in edit mode)
                 if (!isEditing)
                   SizedBox(
                     width: double.infinity,
@@ -600,8 +572,6 @@ class _MyProfilePageState extends State<MyProfilePage> {
                       ),
                     ),
                   ),
-
-                // Save and Cancel buttons (Only show when in edit mode)
                 if (isEditing)
                   Column(
                     children: [

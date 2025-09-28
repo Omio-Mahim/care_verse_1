@@ -68,7 +68,6 @@ class _AuthWrapperState extends State<AuthWrapper> {
   }
 
   void _checkAuthState() {
-    // Listen to auth state changes
     SupabaseService.authStateChanges.listen((AuthState data) {
       if (mounted) {
         setState(() {});
